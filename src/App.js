@@ -4,7 +4,7 @@ import React, { useState, useEffect , createContext} from 'react';
 import Test from './Test'
 import User from './user';
 import Child from './Child';
-import Superchild from './Superchild';
+import Otherchild from './Otherchild';
 
 export const GlobalInfo = createContext();
 
@@ -13,7 +13,9 @@ function App() {
   const [count, setCount] = useState(10);
   const [data1,setData1] = useState(100);
   const [color,setColor] = useState('green');
-
+  const getDay= (item) =>{
+    console.warm(item)
+  }
   
   // useEffect(() => {
   //   // alert("chalega")  
@@ -35,10 +37,16 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <GlobalInfo.Provider value={{ appColor : color }}>
+
+        {/* GlobalInfo */}
+        <GlobalInfo.Provider value={{ appColor : color , getDay : getDay }}>
         <h6>child component</h6>
         <Child /> 
+        <Otherchild />
         </GlobalInfo.Provider>
+        {/* GlobalInfo */}
+
+
         <p> {data} {count}</p>
         <h4>{data1}</h4>
         <Test />
