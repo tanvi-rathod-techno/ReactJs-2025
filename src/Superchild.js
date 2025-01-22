@@ -9,7 +9,7 @@ function Superchild(){
     return (
         <div>
             <h1 style={{color:appColor}}>Super Child</h1>
-            <button onclick={()=>getDay(day)}>Click Me</button>
+            {/* <button onclick={()=>getDay(day)}>Click Me</button> */}
         </div>
     )
 
