@@ -1,63 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
-import React, { useState, useEffect , createContext} from 'react';
-import Test from './Test'
-import User from './user';
-import Child from './Child';
-import Otherchild from './Otherchild';
 
-export const GlobalInfo = createContext();
+import React, { Component } from 'react';
 
-function App() {
-  const [data, setData] = useState("this my app")
-  const [count, setCount] = useState(10);
-  const [data1,setData1] = useState(100);
-  const [color,setColor] = useState('green');
-  const getDay= (item) =>{
-    console.warm(item)
-  }
+class App extends React.Component{
   
-  // useEffect(() => {
-  //   // alert("chalega")  
-  //   // console.log("user effect");
-  //   setTimeout(() => {
-  //     setCount((count) => count + 1)
-  //   }, 1000,[data1])
-  // })
+  constructor(){
+    super();
+    console.warn("constructor")
+  }
 
-  useEffect(() => {
-    console.log("use effect")
-  },[data1])
+  componentDidMount(){
+    console.warn("componentDidMount")
+  }
 
-  function hello(){
-   return  <h1>hello function</h1>
-  } 
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        {/* GlobalInfo */}
-        <GlobalInfo.Provider value={{ appColor : color , getDay : getDay }}>
-        <h6>child component</h6>
-        <Child /> 
-        <Otherchild />
-        </GlobalInfo.Provider>
-        {/* GlobalInfo */}
+  render(){
+    console.warn("render")
+      return (
+        <div>
+          <h1>Life Cycle Method</h1>
+        </div>
+      );
+    }
+  }
 
 
-        <p> {data} {count}</p>
-        <h4>{data1}</h4>
-        <Test />
-        <User count={count} data={data}/>
-        {hello ()}
-        <button onClick={() => setData('new App')}>Update Data</button>
-        <button onClick={() => setCount(count + 1)}>Update Count useEffect</button>
-        <button onClick={() => setData1(data1 + 1)}>Update Count</button>
-      </header>
-    </div>
-  );
-}
+// function App() {
+//   return (
+//     <div className="App">
+//       <h1>React Life Cycle</h1>
+//     </div>
+//   );
+// }
 
 export default App;
