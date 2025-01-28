@@ -1,33 +1,22 @@
-import './App.css';
-import React from 'react';
-import  { atom ,useAtom }  from 'jotai';
+import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
+import './App.css'; // Make sure your CSS file is imported
 
-//count
-const counter = atom(0);
+// Atom with storage
+const theme = atomWithStorage('theme', false);
 
-// them
-const theme = atom('light');
-function App() {
+export default function Page() {
+  const [appTheme, setAppTheme] = useAtom(theme);
 
-  // counter
-  // const [count,setcount] = useAtom(counter); 
-  // const onclick= () => setcount(counter => counter + 
-
-  // them
-  const [appTheme,setAppTheme] = useAtom(theme)
-  const handalclick = () => setAppTheme(appTheme === 'light' ? 'dark' : 'light');
+  const handleClick = () => {
+    setAppTheme(!appTheme); // Toggle theme
+    console.log('Theme switched:', !appTheme); // Debug state
+  };
 
   return (
-    <div className={`App ${appTheme}`}>
-        <h1>atom</h1>
-
-        {/* <h2>{count}</h2> */}
-        {/* <button onClick={onclick}>Add </button> */}
-
-        {/* theme */}
-        <button onClick={handalclick}>{appTheme === 'light' ? 'DARK' : 'Light'} </button>
+    <div className={appTheme ? 'dark' : 'light'}>
+      <h1>This is a theme switcher</h1>
+      <button onClick={handleClick}>{appTheme ? 'DARK' : 'LIGHT'}</button>
     </div>
   );
 }
-
-export default App;

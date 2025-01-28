@@ -38,6 +38,15 @@
   color: white;
 }
 
+.dark {
+  background-color: black;
+  color: white;
+}
+
+.light {
+  background-color: white;
+  color: black;
+}
 
 @keyframes App-logo-spin {
   from {
