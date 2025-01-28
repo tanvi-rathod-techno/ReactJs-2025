@@ -2,30 +2,20 @@ import './App.css';
 import React from 'react';
 import  { atom ,useAtom }  from 'jotai';
 
-//count
-const counter = atom(0);
 
-// them
-const theme = atom('light');
+const textAtom = atom('ready only')
+const uppercase = atom((get) => get(textAtom).toUpperCase());
+
 function App() {
 
-  // counter
-  // const [count,setcount] = useAtom(counter); 
-  // const onclick= () => setcount(counter => counter + 
-
-  // them
-  const [appTheme,setAppTheme] = useAtom(theme)
-  const handalclick = () => setAppTheme(appTheme === 'light' ? 'dark' : 'light');
-
+    const [lowerCase,setUpperCase] = useAtom(textAtom);
+    const [uppercaseText] = useAtom(uppercase);
+    const handleChange = (e) => setUpperCase(e.target.value);
   return (
-    <div className={`App ${appTheme}`}>
-        <h1>atom</h1>
-
-        {/* <h2>{count}</h2> */}
-        {/* <button onClick={onclick}>Add </button> */}
-
-        {/* theme */}
-        <button onClick={handalclick}>{appTheme === 'light' ? 'DARK' : 'Light'} </button>
+    <div className='App'>
+        <h1>Read Only Atom</h1>
+        <input value={lowerCase} onChange={handleChange} />
+      <h1>{uppercaseText}</h1>
     </div>
   );
 }
