@@ -1,61 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
-import React, { useState, useEffect , createContext} from 'react';
-import Test from './Test'
-import User from './user';
-import Child from './Child';
-import Otherchild from './Otherchild';
+import React from 'react';
+import  { atom ,useAtom }  from 'jotai';
 
-export const GlobalInfo = createContext();
+//count
+const counter = atom(0);
 
+// them
+const theme = atom('light');
 function App() {
-  const [data, setData] = useState("this my app")
-  const [count, setCount] = useState(10);
-  const [data1,setData1] = useState(100);
-  const [color,setColor] = useState('green');
-  const getDay= (item) =>{
-    console.warm(item)
-  }
-  
-  // useEffect(() => {
-  //   // alert("chalega")  
-  //   // console.log("user effect");
-  //   setTimeout(() => {
-  //     setCount((count) => count + 1)
-  //   }, 1000,[data1])
-  // })
 
-  useEffect(() => {
-    console.log("use effect")
-  },[data1])
+  // counter
+  // const [count,setcount] = useAtom(counter); 
+  // const onclick= () => setcount(counter => counter + 
 
-  function hello(){
-   return  <h1>hello function</h1>
-  } 
+  // them
+  const [appTheme,setAppTheme] = useAtom(theme)
+  const handalclick = () => setAppTheme(appTheme === 'light' ? 'dark' : 'light');
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className={`App ${appTheme}`}>
+        <h1>atom</h1>
 
-        {/* GlobalInfo */}
-        <GlobalInfo.Provider value={{ appColor : color , getDay : getDay }}>
-        <h6>child component</h6>
-        <Child /> 
-        <Otherchild />
-        </GlobalInfo.Provider>
-        {/* GlobalInfo */}
+        {/* <h2>{count}</h2> */}
+        {/* <button onClick={onclick}>Add </button> */}
 
-
-        <p> {data} {count}</p>
-        <h4>{data1}</h4>
-        <Test />
-        <User count={count} data={data}/>
-        {hello ()}
-        <button onClick={() => setData('new App')}>Update Data</button>
-        <button onClick={() => setCount(count + 1)}>Update Count useEffect</button>
-        <button onClick={() => setData1(data1 + 1)}>Update Count</button>
-      </header>
+        {/* theme */}
+        <button onClick={handalclick}>{appTheme === 'light' ? 'DARK' : 'Light'} </button>
     </div>
   );
 }
