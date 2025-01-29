@@ -1,31 +1,23 @@
-import './App.css';
-import React from 'react';
-import  { atom ,useAtom }  from 'jotai';
+//App.js
 
-//count
-const counter = atom(0);
+import { useEffect } from "react";
+import BookForm from "./BookForm";
+import BookList from "./components/BookList";
+import useBookStore from "./bookStore";
+import "./App.css";
 
-// them
-const theme = atom('light');
 function App() {
+  const reset = useBookStore((state) => state.reset);
 
-  // counter
-  // const [count,setcount] = useAtom(counter); 
-  // const onclick= () => setcount(counter => counter + 
-
-  // them
-  const [appTheme,setAppTheme] = useAtom(theme)
-  const handalclick = () => setAppTheme(appTheme === 'light' ? 'dark' : 'light');
+  useEffect(() => {
+    reset();
+  }, [reset]);
 
   return (
-    <div className={`App ${appTheme}`}>
-        <h1>atom</h1>
-
-        {/* <h2>{count}</h2> */}
-        {/* <button onClick={onclick}>Add </button> */}
-
-        {/* theme */}
-        <button onClick={handalclick}>{appTheme === 'light' ? 'DARK' : 'Light'} </button>
+    <div className="App">
+      <h2>My Library Store</h2>
+      <BookForm />
+      <BookList />
     </div>
   );
 }
